@@ -29,13 +29,13 @@ for layer_num, layer in enumerate(layer_list):
             layer_list[layer_num][i] = ';MOD_START'
             
             insertion = [
-                'G1 X%f Y%f E-%f;reverse move and retract' % (back_x, back_y, retraction),
+                f'G1 X{back_x} Y{back_y} E-{retraction};reverse move and retract',
                 'G91;relative positioning',
-                'G1 Z%f;lift z' % (z_lift),
+                f'G1 Z{z_lift};lift z',
                 'G90;absolute positioning',
-                'G1 X%f Y%f;next move' % (x, y),
+                f'G1 X{x} Y{y};next move',
                 'G91;relative positioning',
-                'G1 Z-%f E%f;resume z and de-retract' % (z_lift, retraction * de_retraction_ratio),
+                f'G1 Z-{z_lift} E{retraction * de_retraction_ratio};resume z and de-retract',
                 'G90;absolute positioning',
                 'G4 P50;dwell 50ms',
                 ';MOD_END',
